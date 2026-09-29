@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dinner at Alex's</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6e3e0; --ink:#12155c; --plate:#fff6f3; --rim:#e2b9b4; --accent:#b8462f; --muted:#7a5a7d; --field:#fff6f3;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#2a1231; --ink:#f8dcd6; --plate:#3c1c45; --rim:#5a2f63; --accent:#f2b544; --muted:#c79fc9; --field:#3c1c45;}
+}
+:root[data-theme="dark"]{--bg:#2a1231; --ink:#f8dcd6; --plate:#3c1c45; --rim:#5a2f63; --accent:#f2b544; --muted:#c79fc9; --field:#3c1c45;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;font-size:17px;line-height:1.6}
+main{max-width:34rem;margin:0 auto;padding:2.5rem 1.25rem 4rem;text-align:center}
+.plate{width:min(88vw,25rem);aspect-ratio:1;margin:0 auto 2rem;border-radius:50%;background:var(--plate);
+  box-shadow:0 0 0 .7rem var(--rim),0 0 0 .8rem var(--bg),0 0 0 1.1rem var(--rim);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+.plate p{margin:0;color:var(--muted)}
+.plate h1{font-family:'Young Serif',Georgia,serif;font-weight:400;font-size:clamp(2.6rem,12vw,3.9rem);line-height:1.02;margin:.4rem 0;color:var(--accent)}
+.plate .when{font-weight:600;color:var(--ink)}
+.note{max-width:26rem;margin:0 auto 2rem}
+dl{margin:0 auto 2.5rem;display:grid;grid-template-columns:auto 1fr;gap:.6rem 1.25rem;max-width:26rem;text-align:left}
+dt{color:var(--muted)} dd{margin:0;font-weight:600}
+h2{font-family:'Young Serif',Georgia,serif;font-weight:400;font-size:1.6rem;margin:0 0 1rem}
+.rsvp{max-width:26rem;margin:0 auto;text-align:left;display:grid;gap:1rem}
+label{display:grid;gap:.3rem;font-weight:600}
+input,textarea{font:inherit;color:var(--ink);background:var(--field);border:1.5px solid var(--rim);border-radius:.6rem;padding:.7rem .8rem}
+input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+fieldset{border:0;padding:0;margin:0;display:flex;gap:.75rem}
+.choice{flex:1;position:relative}
+.choice input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.choice span{display:block;text-align:center;padding:.7rem;border:1.5px solid var(--rim);border-radius:.6rem;font-weight:600}
+.choice input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.choice input:focus-visible + span{outline:3px solid var(--accent);outline-offset:2px}
+button{font:inherit;font-weight:600;cursor:pointer;background:var(--ink);color:var(--bg);border:0;border-radius:.6rem;padding:.85rem 1rem}
+.done{margin-top:1rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <div class="plate">
+    <p>You're invited to</p>
+    <h1 id="title">Dinner at Alex's</h1>
+    <p class="when" id="when">Saturday 14 November, 7:30 pm</p>
+  </div>
+
+  <p class="note" id="note">A long table, three courses, and no rush. Come hungry and stay for dessert.</p>
+
+  <dl>
+    <dt>Where</dt><dd id="where">12 Orchard Lane, Gillingham</dd>
+    <dt>Arrive</dt><dd id="arrive">From 7:30 pm</dd>
+    <dt>Dress</dt><dd id="dress">Smart casual</dd>
+    <dt>Reply by</dt><dd id="by">Saturday 7 November</dd>
+  </dl>
+
+  <h2>Will you come?</h2>
+  <div class="rsvp" id="rsvp" role="group" aria-label="RSVP">
+    <label>Your name <input id="name" autocomplete="name"></label>
+    <fieldset>
+      <legend class="sr" style="position:absolute;left:-999px">Attending</legend>
+      <label class="choice"><input type="radio" name="att" value="Yes" checked><span>Yes, I'll be there</span></label>
+      <label class="choice"><input type="radio" name="att" value="No"><span>Can't make it</span></label>
+    </fieldset>
+    <label>Allergies or dietary needs <textarea id="diet" rows="2"></textarea></label>
+    <button id="send" type="button">Send RSVP by email</button>
+    <p class="done" id="done" hidden>Your email app should open with the reply ready to send.</p>
+  </div>
+</main>
+
+<script>
+  // Edit these to change the invitation and where replies go.
+  const HOST_EMAIL = "alex@example.com";
+  document.getElementById("send").addEventListener("click", () => {
+    const name = document.getElementById("name").value.trim() || "A guest";
+    const att = document.querySelector('input[name="att"]:checked').value;
+    const diet = document.getElementById("diet").value.trim();
+    const subject = encodeURIComponent("RSVP: " + document.getElementById("title").textContent);
+    const body = encodeURIComponent(name + ": " + att + (diet ? "\nDietary needs: " + diet : ""));
+    document.getElementById("done").hidden = false;
+    window.location.href = "mailto:" + HOST_EMAIL + "?subject=" + subject + "&body=" + body;
+  });
+</script>
+</body>
+</html>
