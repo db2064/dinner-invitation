@@ -3,26 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dinner at Alex's</title>
+<title>Dinner at Dorothy's</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f6e3e0; --ink:#12155c; --plate:#fff6f3; --rim:#e2b9b4; --accent:#b8462f; --muted:#7a5a7d; --field:#fff6f3;
+  --bg:#07190f; --ink:#e3f1df; --plate:#0f2c1b; --rim:#1f4d33; --accent:#f2b544; --muted:#a5c9ae; --field:#0f2c1b;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--bg:#2a1231; --ink:#f8dcd6; --plate:#3c1c45; --rim:#5a2f63; --accent:#f2b544; --muted:#c79fc9; --field:#3c1c45;}
+  :root:not([data-theme="light"]){--bg:#07190f; --ink:#e3f1df; --plate:#0f2c1b; --rim:#1f4d33; --accent:#f2b544; --muted:#a5c9ae; --field:#0f2c1b;}
 }
-:root[data-theme="dark"]{--bg:#2a1231; --ink:#f8dcd6; --plate:#3c1c45; --rim:#5a2f63; --accent:#f2b544; --muted:#c79fc9; --field:#3c1c45;}
+:root[data-theme="dark"]{--bg:#07190f; --ink:#e3f1df; --plate:#0f2c1b; --rim:#1f4d33; --accent:#f2b544; --muted:#a5c9ae; --field:#0f2c1b;}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;font-size:17px;line-height:1.6}
 main{max-width:34rem;margin:0 auto;padding:2.5rem 1.25rem 4rem;text-align:center}
-.plate{width:min(88vw,25rem);aspect-ratio:1;margin:0 auto 2rem;border-radius:50%;background:var(--plate);
+.plate{position:relative;width:min(88vw,25rem);aspect-ratio:1;margin:0 auto 2rem;border-radius:50%;background:var(--plate);
   box-shadow:0 0 0 .7rem var(--rim),0 0 0 .8rem var(--bg),0 0 0 1.1rem var(--rim);
   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
 .plate p{margin:0;color:var(--muted)}
+.leaves{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .plate h1{font-family:'Young Serif',Georgia,serif;font-weight:400;font-size:clamp(2.6rem,12vw,3.9rem);line-height:1.02;margin:.4rem 0;color:var(--accent)}
 .plate .when{font-weight:600;color:var(--ink)}
 .note{max-width:26rem;margin:0 auto 2rem}
@@ -46,21 +47,44 @@ button{font:inherit;font-weight:600;cursor:pointer;background:var(--ink);color:v
 <body>
 <main>
   <div class="plate">
+    <svg class="leaves" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <g id="mp">
+          <path d="M0,-10 L1.6,-6.4 L3.4,-7.4 L3.6,-3.6 L7.6,-5.2 L6.4,-1.2 L9.2,0.2 L6,2.6 L6.6,4.6 L2.4,3.8 L2.2,7 L0.6,6.2 L0.6,9 L-0.6,9 L-0.6,6.2 L-2.2,7 L-2.4,3.8 L-6.6,4.6 L-6,2.6 L-9.2,0.2 L-6.4,-1.2 L-7.6,-5.2 L-3.6,-3.6 L-3.4,-7.4 L-1.6,-6.4 Z"/>
+          <path d="M0,-7 V12" fill="none" stroke="rgba(0,0,0,.3)" stroke-width=".6"/>
+        </g>
+      </defs>
+      <use href="#mp" fill="#d9531e" transform="translate(50.0 0.0) rotate(-12) scale(0.58)"/>
+      <use href="#mp" fill="#e8a33a" transform="translate(69.1 3.8) rotate(34) scale(0.7)"/>
+      <use href="#mp" fill="#b32d22" transform="translate(85.4 14.6) rotate(33) scale(0.58)"/>
+      <use href="#mp" fill="#c96a1b" transform="translate(96.2 30.9) rotate(80) scale(0.7)"/>
+      <use href="#mp" fill="#d9531e" transform="translate(100.0 50.0) rotate(78) scale(0.58)"/>
+      <use href="#mp" fill="#e8a33a" transform="translate(96.2 69.1) rotate(124) scale(0.7)"/>
+      <use href="#mp" fill="#b32d22" transform="translate(85.4 85.4) rotate(123) scale(0.58)"/>
+      <use href="#mp" fill="#c96a1b" transform="translate(69.1 96.2) rotate(170) scale(0.7)"/>
+      <use href="#mp" fill="#d9531e" transform="translate(50.0 100.0) rotate(168) scale(0.58)"/>
+      <use href="#mp" fill="#e8a33a" transform="translate(30.9 96.2) rotate(214) scale(0.7)"/>
+      <use href="#mp" fill="#b32d22" transform="translate(14.6 85.4) rotate(213) scale(0.58)"/>
+      <use href="#mp" fill="#c96a1b" transform="translate(3.8 69.1) rotate(260) scale(0.7)"/>
+      <use href="#mp" fill="#d9531e" transform="translate(0.0 50.0) rotate(258) scale(0.58)"/>
+      <use href="#mp" fill="#e8a33a" transform="translate(3.8 30.9) rotate(304) scale(0.7)"/>
+      <use href="#mp" fill="#b32d22" transform="translate(14.6 14.6) rotate(303) scale(0.58)"/>
+      <use href="#mp" fill="#c96a1b" transform="translate(30.9 3.8) rotate(350) scale(0.7)"/>
+    </svg>
     <p>You're invited to</p>
-    <h1 id="title">Dinner at Alex's</h1>
-    <p class="when" id="when">Saturday 14 November, 7:30 pm</p>
+    <h1 id="title">Dinner at Dorothy's</h1>
+    <p class="when" id="when">Thursday 1 October, 7:30 pm</p>
   </div>
 
-  <p class="note" id="note">A long table, three courses, and no rush. Come hungry and stay for dessert.</p>
 
   <dl>
-    <dt>Where</dt><dd id="where">12 Orchard Lane, Gillingham</dd>
+    <dt>Where</dt><dd id="where">Cambridge</dd>
     <dt>Arrive</dt><dd id="arrive">From 7:30 pm</dd>
     <dt>Dress</dt><dd id="dress">Smart casual</dd>
-    <dt>Reply by</dt><dd id="by">Saturday 7 November</dd>
+    <dt>Reply by</dt><dd id="by">Friday</dd>
   </dl>
 
-  <h2>Will you come?</h2>
+  <h2>RSVP</h2>
   <div class="rsvp" id="rsvp" role="group" aria-label="RSVP">
     <label>Your name <input id="name" autocomplete="name"></label>
     <fieldset>
@@ -76,7 +100,7 @@ button{font:inherit;font-weight:600;cursor:pointer;background:var(--ink);color:v
 
 <script>
   // Edit these to change the invitation and where replies go.
-  const HOST_EMAIL = "alex@example.com";
+  const HOST_EMAIL = "dorothy@example.com";
   document.getElementById("send").addEventListener("click", () => {
     const name = document.getElementById("name").value.trim() || "A guest";
     const att = document.querySelector('input[name="att"]:checked').value;
